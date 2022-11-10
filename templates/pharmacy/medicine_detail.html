@@ -20,7 +20,7 @@
       <hr>
       <p class="text-muted">
         <strong>Name pharmacy:</strong>
-        <a href="{% url 'pharmacy:department-detail' pk=de.department %}">{{ department.name_pharmacy }}</a>
+        <a href="{% url 'pharmacy:department-detail' pk=department.id %}">{{ department.name_pharmacy }}</a>
       <br><strong>Address:</strong>
       {{ department.address }}
       <br><strong>Phone:</strong>

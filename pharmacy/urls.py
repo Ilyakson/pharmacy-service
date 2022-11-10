@@ -2,8 +2,9 @@ from django.urls import path
 
 from pharmacy.views import index, MedicineCreateView, MedicineListView, ManufacturerListView, MedicineDetailView, \
     DepartmentListView, DepartmentDetailView, ManufacturerCreateView, ManufacturerUpdateView, ManufacturerDeleteView, \
-    MedicineUpdateView, MedicineDeleteView
-
+    MedicineUpdateView, MedicineDeleteView, DepartmentAddressUpdateView, DepartmentPhoneUpdateView, \
+    DepartmentTimeWorkUpdateView, DepartmentNameUpdateView, DepartmentDeleteView, link_add, DepartmentCreateView, \
+    DepartmentLicenseUpdateView
 
 urlpatterns = [
     path("", index, name="index"),
@@ -56,6 +57,39 @@ urlpatterns = [
         DepartmentDetailView.as_view(),
         name="department-detail"
     ),
+    path(
+        "department/create/", DepartmentCreateView.as_view(), name="department-create"),
+    path(
+        "department/<int:pk>/update/license/",
+        DepartmentLicenseUpdateView.as_view(),
+        name="department-update-license"
+    ),
+    path(
+        "department/<int:pk>/update/address/",
+        DepartmentAddressUpdateView.as_view(),
+        name="department-update-address",
+    ),
+    path(
+        "department/<int:pk>/update/phone/",
+        DepartmentPhoneUpdateView.as_view(),
+        name="department-update-phone",
+    ),
+    path(
+        "department/<int:pk>/update/time_work/",
+        DepartmentTimeWorkUpdateView.as_view(),
+        name="department-update-time-work",
+    ),
+    path(
+        "department/<int:pk>/update/name/",
+        DepartmentNameUpdateView.as_view(),
+        name="department-update-name",
+    ),
+    path(
+        "department/<int:pk>/delete/",
+        DepartmentDeleteView.as_view(),
+        name="department-delete"
+    ),
+    path("medicine/<int:pk>/assign/", link_add, name="link-add")
 ]
 
 app_name = "pharmacy"

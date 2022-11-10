@@ -17,7 +17,7 @@ class Manufacturer(models.Model):
 
 class Department(AbstractUser):
     license_number = models.CharField(max_length=255, unique=True)
-    phone = models.IntegerField(unique=True)
+    phone = models.IntegerField(unique=True, null=True)
     address = models.CharField(max_length=255, unique=True)
     name_pharmacy = models.CharField(max_length=255)
     time_work = models.CharField(max_length=255)

@@ -1,9 +1,13 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
+from pharmacy.forms import DepartmentCreationForm, DepartmentLicenseUpdateForm, DepartmentAddressUpdateForm, \
+    DepartmentPhoneUpdateForm, DepartmentTimeWorkUpdateForm, DepartmentNameUpdateForm
 from pharmacy.models import Department, Medicine, Manufacturer
 
 
@@ -17,7 +21,7 @@ def index(request):
     request.session["num_visits"] = num_visits + 1
 
     context = {
-        "num_accounts": num_departments,
+        "num_departments": num_departments,
         "num_medicines": num_medicines,
         "num_manufacturers": num_manufacturers,
         "num_visits": num_visits + 1
@@ -91,3 +95,58 @@ class DepartmentDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "pharmacy/department_detail.html"
     queryset = Department.objects.prefetch_related("medicines__manufacturer")
 
+
+class DepartmentCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Department
+    form_class = DepartmentCreationForm
+
+
+class DepartmentDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Department
+    success_url = reverse_lazy("pharmacy:department-list")
+
+
+class DepartmentLicenseUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Department
+    form_class = DepartmentLicenseUpdateForm
+    success_url = reverse_lazy("pharmacy:department-list")
+
+
+class DepartmentAddressUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Department
+    form_class = DepartmentAddressUpdateForm
+    success_url = reverse_lazy("pharmacy:department-list")
+
+
+class DepartmentPhoneUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Department
+    form_class = DepartmentPhoneUpdateForm
+    success_url = reverse_lazy("pharmacy:department-list")
+
+
+class DepartmentTimeWorkUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Department
+    form_class = DepartmentTimeWorkUpdateForm
+    success_url = reverse_lazy("pharmacy:department-list")
+
+
+class DepartmentNameUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Department
+    form_class = DepartmentNameUpdateForm
+    success_url = reverse_lazy("pharmacy:department-list")
+
+
+@login_required
+def link_add(request, pk):
+    medicine = Medicine.objects.get(id=pk)
+    user = get_user_model().objects.get(id=request.user.id)
+    if user in medicine.departments.all():
+        medicine.departments.remove(user)
+    else:
+        medicine.departments.add(user)
+    return HttpResponseRedirect(
+        reverse_lazy(
+            "pharmacy:medicine-detail",
+            args=[pk]
+        )
+    )

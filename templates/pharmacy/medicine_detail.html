@@ -2,7 +2,7 @@
 {% block content %}
   <h1>
     Medicines
-    {% if user in medicine.accounts.all %}
+    {% if user in medicine.departments.all %}
       <a href="{% url 'pharmacy:link-add' pk=medicine.id %}" class="btn btn-danger link-to-page btn-sm">Delete me from this medicine</a>
     {% else %}
       <a href="{% url 'pharmacy:link-add' pk=medicine.id %}" class="btn btn-success link-to-page btn-sm">Assign me to this medicine</a>
@@ -15,12 +15,12 @@
   <br>
 
   <div class="sm-3">
-    <h4>LIST OF ACCOUNTS:</h4>
+    <h4>LIST OF DEPARTMENTS:</h4>
     {% for department in medicine.department.all %}
       <hr>
       <p class="text-muted">
         <strong>Name pharmacy:</strong>
-        <a href="{% url 'pharmacy:account-detail' pk=de.department %}">{{ department.name_pharmacy }}</a>
+        <a href="{% url 'pharmacy:department-detail' pk=de.department %}">{{ department.name_pharmacy }}</a>
       <br><strong>Address:</strong>
       {{ department.address }}
       <br><strong>Phone:</strong>

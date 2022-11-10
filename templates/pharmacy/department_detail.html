@@ -8,31 +8,31 @@
   </h1>
   <div class="ml-3">
     <p>
-      <strong>Director name:</strong> {{ account.first_name }} {{ account.last_name }}
+      <strong>Director name:</strong> {{ department.first_name }} {{ department.last_name }}
       <a href="{% url 'pharmacy:department-update-name' pk=department.id %}" class="btn btn-secondary btn-sm link-to-page">
         Update name
       </a>
     </p>
     <p>
-      <strong>Director phone:</strong> {{ account.phone }}
+      <strong>Director phone:</strong> {{ department.phone }}
       <a href="{% url 'pharmacy:department-update-phone' pk=department.id %}" class="btn btn-secondary btn-sm link-to-page">
         Update phone
       </a>
     </p>
     <p>
-      <strong>License number:</strong> {{ account.license_number }}
+      <strong>License number:</strong> {{ department.license_number }}
       <a href="{% url 'pharmacy:department-update-license' pk=department.id %}" class="btn btn-secondary btn-sm link-to-page">
         Update license number
       </a>
     </p>
     <p>
-      <strong>Address:</strong> {{ account.address }}
+      <strong>Address:</strong> {{ department.address }}
       <a href="{% url 'pharmacy:department-update-address' pk=department.id %}" class="btn btn-secondary btn-sm link-to-page">
         Update address
       </a>
     </p>
     <p>
-      <strong>Time work:</strong> {{ account.time_work }}
+      <strong>Time work:</strong> {{ department.time_work }}
       <a href="{% url 'pharmacy:department-update-time-work' pk=department.id %}" class="btn btn-secondary btn-sm link-to-page">
         Update time work
       </a>

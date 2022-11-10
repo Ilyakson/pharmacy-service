@@ -23,8 +23,8 @@ class Department(AbstractUser):
     time_work = models.CharField(max_length=255)
 
     class Meta:
-        verbose_name = "account"
-        verbose_name_plural = "accounts"
+        verbose_name = "department"
+        verbose_name_plural = "departments"
 
     def __str__(self):
         return (
@@ -33,7 +33,7 @@ class Department(AbstractUser):
         )
 
     def get_absolute_url(self):
-        return reverse("pharmacy:account-detail", kwargs={"pk": self.pk})
+        return reverse("pharmacy:department-detail", kwargs={"pk": self.pk})
 
 
 class Medicine(models.Model):
@@ -41,7 +41,7 @@ class Medicine(models.Model):
     manufacturer = models.ForeignKey(
         Manufacturer, on_delete=models.CASCADE, related_name="medicines"
     )
-    accounts = models.ManyToManyField(
+    departments = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         related_name="medicines"
     )

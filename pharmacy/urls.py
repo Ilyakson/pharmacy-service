@@ -50,9 +50,9 @@ urlpatterns = [
         MedicineDeleteView.as_view(),
         name="medicine-delete"
     ),
-    path("accounts/", DepartmentListView.as_view(), name="department-list"),
+    path("departments/", DepartmentListView.as_view(), name="department-list"),
     path(
-        "accounts/<int:pk>/",
+        "departments/<int:pk>/",
         DepartmentDetailView.as_view(),
         name="department-detail"
     ),

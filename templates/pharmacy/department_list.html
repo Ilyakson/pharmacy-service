@@ -2,8 +2,8 @@
 {% load crispy_forms_filters %}
 {% block content %}
   <h1>
-    Account List
-    <a href="{% url 'pharmacy:account-create' %}" class="btn btn-primary link-to-page btn-sm">
+    Department List
+    <a href="{% url 'pharmacy:department-create' %}" class="btn btn-primary link-to-page btn-sm">
       Create
     </a>
   </h1>
@@ -13,7 +13,7 @@
     <input class="btn btn-secondary btn-sm" type="submit" value="🔎">
   </form>
 
-  {% if account_list %}
+  {% if department_list %}
     <table class="table">
       <tr>
         <th>Username</th>
@@ -23,7 +23,7 @@
       </tr>
       {% for department in department_list %}
         <tr>
-          <td><a class="color_for_link" href="{% url 'pharmacy:account-detail' pk=department.id %}">{{ department.username }} {% if department.id == user.id %}(Me){% endif %} </a></td>
+          <td><a class="color_for_link" href="{% url 'pharmacy:department-detail' pk=department.id %}">{{ department.username }} {% if department.id == user.id %}(Me){% endif %} </a></td>
           <td>{{ department.name_pharmacy }}</td>
           <td>{{ department.address }}</td>
           <td>{{ department.time_work }}</td>

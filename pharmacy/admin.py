@@ -15,7 +15,7 @@ class MedicineAdmin(admin.ModelAdmin):
 
 
 @admin.register(Department)
-class AccountAdmin(UserAdmin):
+class DepartmentAdmin(UserAdmin):
     list_display = UserAdmin.list_display + ("license_number",)
     fieldsets = UserAdmin.fieldsets + (
         ("Additional info", {"fields": ("license_number",)}),

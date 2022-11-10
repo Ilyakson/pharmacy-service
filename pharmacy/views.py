@@ -1,5 +1,8 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views import generic
 
 from pharmacy.models import Department, Medicine, Manufacturer
 
@@ -21,3 +24,70 @@ def index(request):
     }
 
     return render(request, "pharmacy/index.html", context=context)
+
+
+class ManufacturerListView(generic.ListView):
+    model = Manufacturer
+    template_name = "pharmacy/manufacturer_list.html"
+    queryset = Manufacturer.objects.order_by("name")
+    paginate_by = 5
+
+
+class ManufacturerCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Manufacturer
+    fields = "__all__"
+    success_url = reverse_lazy("pharmacy:manufacturer-list")
+
+
+class ManufacturerUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Manufacturer
+    fields = "__all__"
+    success_url = reverse_lazy("pharmacy:manufacturer-list")
+
+
+class ManufacturerDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Manufacturer
+    success_url = reverse_lazy("pharmacy:manufacturer-list")
+
+
+class MedicineListView(LoginRequiredMixin, generic.ListView):
+    model = Medicine
+    paginate_by = 5
+    template_name = "pharmacy/medicine_list.html"
+    queryset = Medicine.objects.select_related("manufacturer")
+
+
+class MedicineDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Medicine
+    template_name = "pharmacy/medicine_detail.html"
+
+
+class MedicineCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Medicine
+    fields = "__all__"
+    success_url = reverse_lazy("pharmacy:medicine-list")
+
+
+class MedicineUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Medicine
+    fields = "__all__"
+    success_url = reverse_lazy("pharmacy:medicine-list")
+
+
+class MedicineDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Medicine
+    success_url = reverse_lazy("pharmacy:medicine-list")
+
+
+class DepartmentListView(LoginRequiredMixin, generic.ListView):
+    model = Department
+    template_name = "pharmacy/department_list.html"
+    paginate_by = 5
+    queryset = Department.objects.all()
+
+
+class DepartmentDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Department
+    template_name = "pharmacy/department_detail.html"
+    queryset = Department.objects.prefetch_related("medicines__manufacturer")
+

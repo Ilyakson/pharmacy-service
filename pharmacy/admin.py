@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from pharmacy.models import Manufacturer, Account, Medicine
+from pharmacy.models import Manufacturer, Department, Medicine
 
 
 admin.site.register(Manufacturer)
@@ -14,7 +14,7 @@ class MedicineAdmin(admin.ModelAdmin):
     search_fields = ["model"]
 
 
-@admin.register(Account)
+@admin.register(Department)
 class AccountAdmin(UserAdmin):
     list_display = UserAdmin.list_display + ("license_number",)
     fieldsets = UserAdmin.fieldsets + (

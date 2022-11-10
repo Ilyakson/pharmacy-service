@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "pharmacy",
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "pharmacy_service.wsgi.application"
 
+AUTH_USER_MODEL = "pharmacy.Account"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

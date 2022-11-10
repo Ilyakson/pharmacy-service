@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+{% block content %}
+  <h1>
+    Account List
+    <a href="{% url 'pharmacy:account-create' %}" class="btn btn-primary link-to-page btn-sm">
+      Create
+    </a>
+  </h1>
+
+  <form action="" method="get" class="form-inline">
+  {{ search_form|crispy }}
+    <input class="btn btn-secondary btn-sm" type="submit" value="🔎">
+  </form>
+
+  {% if account_list %}
+    <table class="table">
+      <tr>
+        <th>Username</th>
+        <th>Name pharmacy</th>
+        <th>Address</th>
+        <th>Time of work</th>
+      </tr>
+      {% for department in department_list %}
+        <tr>
+          <td><a class="color_for_link" href="{% url 'pharmacy:account-detail' pk=department.id %}">{{ department.username }} {% if department.id == user.id %}(Me){% endif %} </a></td>
+          <td>{{ department.name_pharmacy }}</td>
+          <td>{{ department.address }}</td>
+          <td>{{ department.time_work }}</td>
+        </tr>
+      {% endfor %}
+    {% else %}
+        <p>There are no departments!</p>
+    </table>
+
+  {% endif %}
+{% endblock %}

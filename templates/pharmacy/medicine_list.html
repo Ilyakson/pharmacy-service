@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% block content %}
+  <h1>
+    Medicine list
+    <a href="{% url 'pharmacy:medicine-create' %}" class="btn btn-primary link-to-page btn-sm">Create</a>
+  </h1>
+
+  <form action="" method="get" class="form-inline">
+    {{ search_form|crispy }}
+    <input class="btn btn-secondary" type="submit" value="🔍">
+  </form>
+
+  {% if medicine_list %}
+    <table class="table">
+      <tr>
+        <th>Id</th>
+        <th>Manufacturer</th>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Price</th>
+        <th>Amount</th>
+      </tr>
+      {% for medicine in medicine_list %}
+        <tr>
+          <td><a class="color_for_link" href="{% url 'pharmacy:medicine-detail' pk=medicine.id %}">{{ medicine.id }}</a></td>
+          <td>{{ medicine.manufacturer.name }}</td>
+          <td>{{ medicine.name }}</td>
+          <td>{{ medicine.manufacturer.country }}</td>
+          <td>{{ medicine.price }}</td>
+          <td>{{ medicine.amount_medicine }}</td>
+        </tr>
+      {% endfor %}
+    {% else %}
+        <p>There are no medicines!</p>
+    </table>
+
+  {% endif %}
+{% endblock %}

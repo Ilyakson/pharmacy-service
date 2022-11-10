@@ -15,7 +15,7 @@ class Manufacturer(models.Model):
         return f"Name: {self.name} | Country: {self.country}"
 
 
-class Account(AbstractUser):
+class Department(AbstractUser):
     license_number = models.CharField(max_length=255, unique=True)
     phone = models.IntegerField(unique=True)
     address = models.CharField(max_length=255, unique=True)

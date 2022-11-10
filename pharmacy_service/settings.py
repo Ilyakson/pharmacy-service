@@ -71,7 +71,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "pharmacy_service.wsgi.application"
 
-AUTH_USER_MODEL = "pharmacy.Account"
+AUTH_USER_MODEL = "pharmacy.Department"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

@@ -6,8 +6,15 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from pharmacy.forms import DepartmentCreationForm, DepartmentLicenseUpdateForm, DepartmentAddressUpdateForm, \
-    DepartmentPhoneUpdateForm, DepartmentTimeWorkUpdateForm, DepartmentNameUpdateForm
+
+from pharmacy.forms import (
+    DepartmentCreationForm,
+    DepartmentLicenseUpdateForm,
+    DepartmentAddressUpdateForm,
+    DepartmentPhoneUpdateForm,
+    DepartmentTimeWorkUpdateForm,
+    DepartmentNameUpdateForm
+)
 from pharmacy.models import Department, Medicine, Manufacturer
 
 

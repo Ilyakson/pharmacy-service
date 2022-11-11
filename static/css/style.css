@@ -1,0 +1,26 @@
+body{
+    margin-top: 20px;
+    min-height: 100vh;
+    background-image: url('/static/background.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.link-to-page {
+    float: right;
+    margin: 0 2px 0 2px;
+}
+
+.list-group-item {
+    background-color: wheat;
+}
+.color{
+    color: black;
+}
+.color_for_delete{
+    color: red;
+}
+.color_for_link{
+    color: blue;
+}

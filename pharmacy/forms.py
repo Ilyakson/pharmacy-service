@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
-from models import Department
+from pharmacy.models import Department
 
 
 def validate_license_number(license_number):

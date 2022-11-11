@@ -1,8 +1,9 @@
 from django import forms
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
-from pharmacy.models import Department
+from pharmacy.models import Department, Medicine
 
 
 def validate_license_number(license_number):
@@ -61,3 +62,14 @@ class DepartmentNameUpdateForm(forms.ModelForm):
     class Meta:
         model = Department
         fields = ("first_name", "last_name")
+
+
+class MedicineForm(forms.ModelForm):
+    departments = forms.ModelMultipleChoiceField(
+        queryset=get_user_model().objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+    )
+
+    class Meta:
+        model = Medicine
+        fields = "__all__"

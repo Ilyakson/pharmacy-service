@@ -13,7 +13,7 @@ from pharmacy.forms import (
     DepartmentAddressUpdateForm,
     DepartmentPhoneUpdateForm,
     DepartmentTimeWorkUpdateForm,
-    DepartmentNameUpdateForm
+    DepartmentNameUpdateForm, MedicineForm
 )
 from pharmacy.models import Department, Medicine, Manufacturer
 
@@ -75,13 +75,13 @@ class MedicineDetailView(LoginRequiredMixin, generic.DetailView):
 
 class MedicineCreateView(LoginRequiredMixin, generic.CreateView):
     model = Medicine
-    fields = "__all__"
+    form_class = MedicineForm
     success_url = reverse_lazy("pharmacy:medicine-list")
 
 
 class MedicineUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Medicine
-    fields = "__all__"
+    form_class = MedicineForm
     success_url = reverse_lazy("pharmacy:medicine-list")
 
 

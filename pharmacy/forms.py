@@ -73,3 +73,33 @@ class MedicineForm(forms.ModelForm):
     class Meta:
         model = Medicine
         fields = "__all__"
+
+
+class DepartmentSearchForm(forms.Form):
+    name_pharmacy = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={
+            "placeholder": "Search by name pharmacy "
+        }
+        )
+    )
+
+
+class MedicineSearchForm(forms.Form):
+    name = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Search by name "})
+    )
+
+
+class ManufacturerSearchForm(forms.Form):
+    name = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Search by name "})
+    )

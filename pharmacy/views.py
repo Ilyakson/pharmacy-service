@@ -13,7 +13,7 @@ from pharmacy.forms import (
     DepartmentAddressUpdateForm,
     DepartmentPhoneUpdateForm,
     DepartmentTimeWorkUpdateForm,
-    DepartmentNameUpdateForm, MedicineForm
+    DepartmentNameUpdateForm, MedicineForm, MedicineSearchForm, ManufacturerSearchForm, DepartmentSearchForm
 )
 from pharmacy.models import Department, Medicine, Manufacturer
 
@@ -43,6 +43,20 @@ class ManufacturerListView(generic.ListView):
     queryset = Manufacturer.objects.order_by("name")
     paginate_by = 5
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ManufacturerListView, self).get_context_data(**kwargs)
+
+        context["search_form"] = ManufacturerSearchForm()
+
+        return context
+
+    def get_queryset(self):
+        name = self.request.GET.get("name", None)
+
+        if name:
+            return self.queryset.filter(name__icontains=name)
+        return self.queryset
+
 
 class ManufacturerCreateView(LoginRequiredMixin, generic.CreateView):
     model = Manufacturer
@@ -66,6 +80,20 @@ class MedicineListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
     template_name = "pharmacy/medicine_list.html"
     queryset = Medicine.objects.select_related("manufacturer")
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(MedicineListView, self).get_context_data(**kwargs)
+
+        context["search_form"] = MedicineSearchForm()
+
+        return context
+
+    def get_queryset(self):
+        name = self.request.GET.get("name", None)
+
+        if name:
+            return self.queryset.filter(model__icontains=name)
+        return self.queryset
 
 
 class MedicineDetailView(LoginRequiredMixin, generic.DetailView):
@@ -95,6 +123,20 @@ class DepartmentListView(LoginRequiredMixin, generic.ListView):
     template_name = "pharmacy/department_list.html"
     paginate_by = 5
     queryset = Department.objects.all()
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(DepartmentListView, self).get_context_data(**kwargs)
+
+        context["search_form"] = DepartmentSearchForm()
+
+        return context
+
+    def get_queryset(self):
+        name_pharmacy = self.request.GET.get("name_pharmacy", None)
+
+        if name_pharmacy:
+            return self.queryset.filter(name_pharmacy__icontains=name_pharmacy)
+        return self.queryset
 
 
 class DepartmentDetailView(LoginRequiredMixin, generic.DetailView):

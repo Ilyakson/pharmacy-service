@@ -52,4 +52,4 @@ class Medicine(models.Model):
         ordering = ["-amount_medicine"]
 
     def __str__(self):
-        return f"Model: {self.name}; Manufacturer: {self.manufacturer.name}"
+        return f"Model: {self.name} Manufacturer: {self.manufacturer}"

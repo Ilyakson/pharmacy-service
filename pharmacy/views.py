@@ -13,7 +13,11 @@ from pharmacy.forms import (
     DepartmentAddressUpdateForm,
     DepartmentPhoneUpdateForm,
     DepartmentTimeWorkUpdateForm,
-    DepartmentNameUpdateForm, MedicineForm, MedicineSearchForm, ManufacturerSearchForm, DepartmentSearchForm
+    DepartmentNameUpdateForm,
+    MedicineForm,
+    MedicineSearchForm,
+    ManufacturerSearchForm,
+    DepartmentSearchForm
 )
 from pharmacy.models import Department, Medicine, Manufacturer
 
@@ -37,7 +41,7 @@ def index(request):
     return render(request, "pharmacy/index.html", context=context)
 
 
-class ManufacturerListView(generic.ListView):
+class ManufacturerListView(LoginRequiredMixin, generic.ListView):
     model = Manufacturer
     template_name = "pharmacy/manufacturer_list.html"
     queryset = Manufacturer.objects.order_by("name")

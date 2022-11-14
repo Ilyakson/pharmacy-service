@@ -9,7 +9,8 @@
   </h1>
 
   <form action="" method="get" class="form-inline">
-  {{ search_form|crispy }}
+    {% csrf_token %}
+    {{ search_form|crispy }}
     <input class="btn btn-secondary btn-sm" type="submit" value="🔎">
   </form>
   {% if department_list %}

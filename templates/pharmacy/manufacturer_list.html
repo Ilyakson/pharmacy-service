@@ -36,7 +36,7 @@
             <a href="{% url 'pharmacy:manufacturer-update' pk=manufacturer.id%}">Update</a>
           </td>
           <td>
-            <a class="color_for_delete"  href="{% url 'pharmacy:manufacturer-delete' pk=manufacturer.id%}">🗑️</a>
+            <a href="{% url 'pharmacy:manufacturer-delete' pk=manufacturer.id%}">🗑️</a>
           </td>
         </tr>
       {% endfor %}

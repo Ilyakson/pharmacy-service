@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>
+    Pharmacy: {{ department.username }}
+    <a href="{% url 'pharmacy:department-delete' pk=department.id %}" class="btn btn-danger btn-sm link-to-page">
+      🗑️
+    </a>
+  </h1>
+  <div class="ml-3">
+    <p>
+      <strong>Director name:</strong> {{ department.first_name }} {{ department.last_name }}
+      <a href="{% url 'pharmacy:department-update-name' pk=department.id %}" class="btn btn-secondary btn-sm link-to-page">
+        Update name
+      </a>
+    </p>
+    <p>
+      <strong>Director phone:</strong> {{ department.phone }}
+      <a href="{% url 'pharmacy:department-update-phone' pk=department.id %}" class="btn btn-secondary btn-sm link-to-page">
+        Update phone
+      </a>
+    </p>
+    <p>
+      <strong>License number:</strong> {{ department.license_number }}
+      <a href="{% url 'pharmacy:department-update-license' pk=department.id %}" class="btn btn-secondary btn-sm link-to-page">
+        Update license number
+      </a>
+    </p>
+    <p>
+      <strong>Address:</strong> {{ department.address }}
+      <a href="{% url 'pharmacy:department-update-address' pk=department.id %}" class="btn btn-secondary btn-sm link-to-page">
+        Update address
+      </a>
+    </p>
+    <p>
+      <strong>Time work:</strong> {{ department.time_work }}
+      <a href="{% url 'pharmacy:department-update-time-work' pk=department.id %}" class="btn btn-secondary btn-sm link-to-page">
+        Update time work
+      </a>
+    </p>
+  </div>
+  <h4>Medicines:</h4>
+      {% for medicine in department.medicines.all %}
+        <hr>
+        <p>
+          <strong>Model:</strong>
+          <a href="{% url 'pharmacy:medicine-detail' pk=medicine.id %}" class="color">
+          {{ medicine.model }}
+          </a>
+        </p>
+
+        <p><strong>Manufacturer:</strong> {{ medicine.manufacturer.name }}</p>
+        <p class="text-muted"><strong>Id:</strong> {{medicine.id}}</p>
+       <hr>
+
+
+
+    {% endfor %}
+{% endblock %}
